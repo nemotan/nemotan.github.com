@@ -1,14 +1,12 @@
 ---
 layout: post
-title: ubutun下intellij配置git
+title: ubutun下intellij idea配置git
 categories:
 - git
 tags:
 - git
 - intellij
 ---
-
-#ubutun下intellij idea配置git
 ##安装intellij
 直接去官网下载linux版本即可
 ##安装git

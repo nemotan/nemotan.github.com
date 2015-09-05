@@ -22,7 +22,7 @@ ubutun执行:
 进入到~/.ssh目录，发现id_rsa.pub文件，把里面的内容复制到gitthub官网的seeting下的ssh key进行添加。
 ##intellij idea git配置
 1、File-->seegting-->Version Control-->GitHub,输入用户名和密码。
-<img src="{{site.url}}/2015/1_1.png" width="95%"/>
+<img src="{{site.iurl}}/2015/1_1.png" width="95%"/>
 
 2、File-->seeting-->Version Control-->Git，这里的Path设置为ubutun下安装的git执行目录：我这里执行apt-get install git之后，会把git命令安装到/user/bin目录下。点击test会显示git的版本信息
 <img src="{{site.iurl}}/2015/1_2.png" width="95%"/>

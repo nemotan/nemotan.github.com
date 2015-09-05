@@ -28,7 +28,7 @@ ubutun执行:
 <img src="{{site.iurl}}/2015/1_2.png" width="95%"/>
 
 3、单击module定位到module之后，点击VSC-->import into version control -->share project on GitHub 。之后输入respoitory name就可以把该module share到gitHub上了。
-<img src={{site.iurl}}/2015/1_3.png" width="95%"/>
+<img src="{{site.iurl}}/2015/1_3.png" width="95%"/>
 ##另外附上：命令行提交到远程github
 安装好git以后需要执行的命令如下：
 

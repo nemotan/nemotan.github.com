@@ -1,6 +1,6 @@
 ---
 layout: post
-title: hive array、map、struct使用
+title: hive（二）、hive array、map、struct使用
 categories:
 - hive
 tags:

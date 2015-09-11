@@ -14,7 +14,7 @@ function createFile(){
         else
             `touch $file`
         echo "$file 创建成功"！
-        echo "---\nlayout: post\ntitle: $2\ncategories:\n- $3\ntags:\n- $4\n---" > $file
+        echo "---\nlayout: post\ntitle: $3\ncategories:\n- $4\ntags:\n- $5\n---" > $file
     fi
 }
 
@@ -25,6 +25,6 @@ if [ $# -ne 3 ];
      today=`date "+%Y-%m-%d"`
      fileName="$today-$1.md"
      dire=`pwd`/_posts/`date "+%Y"`
-     createFile $dire $fileName $2 $3
+     createFile $dire $fileName $1 $2 $3
 fi
 

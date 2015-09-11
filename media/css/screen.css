@@ -193,7 +193,7 @@ dl .meta {
 
 }
 
-.listing-item time{color:#999999;display: inline-block;width: 90px}
+.listing-item time{color:#999999;display: inline-block;width: 95px}
 .listing-seperator{font-weight:bold;}
 
 
@@ -202,7 +202,7 @@ font: 14px Arial,Helvetica,sans-serif;
 color: #AAA;
 margin: 20px 0;
 line-height: 150%;
-display: block;
+display: block;px
 }
 
 .paginator a,.paginator span{

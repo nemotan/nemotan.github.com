@@ -25,6 +25,6 @@ if [ $# -ne 3 ];
      today=`date "+%Y-%m-%d"`
      fileName="$today-$1.md"
      dire=`pwd`/_posts/`date "+%Y"`
-     createFile $dire $fileName $1 $2 $3
+     createFile "$dire" "$fileName" "$1" "$2" "$3"
 fi
 

@@ -14,7 +14,7 @@ function createFile(){
         else
             `touch $file`
         echo "$file 创建成功"！
-        echo "---\nlayout: post\ntitle: $3\ncategories:\n- $4\ntags:\n- $5\n---" > $file
+        echo "---\nlayout: post\ntitle:  $3\ncategories:\n- $4\ntags:\n- $5\n---" > $file
     fi
 }
 

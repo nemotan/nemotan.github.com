@@ -193,7 +193,7 @@ dl .meta {
 
 }
 
-.listing-item time{color:#999999;}
+.listing-item time{color:#999999;display: inline-block;width: 90px}
 .listing-seperator{font-weight:bold;}
 
 

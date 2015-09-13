@@ -4,7 +4,7 @@ sh hide.sh
 echo "替换成功!"
 echo "同步中......"
 git add *
-if [ -n $1 ];
+if [ $# -ge 1 ];
   then
     git commit -m "$1" 
 else 

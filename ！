@@ -12,20 +12,8 @@ fi
 LANGURAGE_ARR=(java bash js sql)
 for LANG in ${LANGURAGE_ARR[@]}
 do
-     PA="\`\`\`";
-     FILES=`grep -n "${PA}${LANG}" -rl ./_posts/`
-     if [ -n "${FILES}" ];
-     	then 
-	    sed -i "" "s/\`\`\`${LANG}/{% highlight ${LANG} %}/g" ${FILES}
-        else
-	    echo "${LANG}无匹配的文件"
-     fi
+     FILES=`grep -n '\`\`\`${LANG}' -rl ./_posts/`
+     echo ${FILES}
+# sed -i "" "s/\`\`\`${LANG}/{% highlight ${LANG} %}/g" `grep -n '\`\`\`${LANG}' -rl ./_posts/`
 done
-
-FILES_END=`grep -n '\`\`\`' -rl ./_posts/`
-if [ -n "${FILES_END}" ];
-	then 
- 		sed -i "" "s/\`\`\`/{% endhighlight %}/g" ${FILES_END}
-	else
-		echo "结束符无匹配的文件"
-fi	
+#sed -i "" "s/\`\`\`/{% endhighlight %}/g" `grep -n "\`\`\`" -rl ./_posts/`

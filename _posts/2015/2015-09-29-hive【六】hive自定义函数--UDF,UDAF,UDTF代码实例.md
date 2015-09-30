@@ -18,7 +18,7 @@ hive常用函数请参考：<a href="https://cwiki.apache.org/confluence/display
 ##UDFS（用户自定义函数）
 首先，你需要创建一个类继承UDF，必须有一个或者多个名为evaluate的方法。
 
-```java
+{% highlight java %}
 /**
  * 求一個升序的数组中，N个最大值的和
  *
@@ -47,8 +47,6 @@ public class ArraySizeSum extends UDF {
     }
 }
 ```
-{% highlight python %}
-{% endhighlight %}
 
 把程序打包成jar，并且创建临时函数（自定义函数class文件需要在hive的classpath下）
 
@@ -66,7 +64,7 @@ User-Defined Aggregation Functions(UDAFS：用户自定义聚合函数)是一个
 resolver实现类型检测，和操作符重载，老得api必须继承org.apache.hadoop.hive.ql.udf.GenericUDAFResolver2 ，为了新版本的hive改进，建议继承AbstractGenericUDAFResolver类。
 <br>代码架构如下：
 
-```java
+{% highlight java %}
 public class GenericUDAFHistogramNumeric extends AbstractGenericUDAFResolver {
   static final Log LOG = LogFactory.getLog(GenericUDAFHistogramNumeric.class.getName());
  
@@ -85,7 +83,7 @@ public class GenericUDAFHistogramNumeric extends AbstractGenericUDAFResolver {
 ###实现evaluator
 所有evaluators必须继承抽象类org.apache.hadoop.hive.ql.udf.generic.GenericUDAFEvaluator。子类必须实现它的一些抽象方法，实现UDAF的逻辑。GenericUDAFEvaluator有一个嵌套类Mode,这个类很重要，它表示了udaf在mapreduce的各个阶段，理解Mode的含义，就可以理解了hive的UDAF的运行流程。
 
-```java
+{% highlight java %}
 public static enum Mode {
     /**
      * PARTIAL1: 这个是mapreduce的map阶段:从原始数据到部分数据聚合
@@ -111,7 +109,7 @@ public static enum Mode {
 ```
 evaluator代码架构：
 
-```java
+{% highlight java %}
 #!Java
   public static class GenericUDAFHistogramNumericEvaluator extends GenericUDAFEvaluator {
  
@@ -166,7 +164,7 @@ evaluator代码架构：
 **源码分析一：GenericUDAFSumLong**
 <br>这是一个sum求和的UDAF：<br>
 
-```java
+{% highlight java %}
 public static class GenericUDAFSumLong extends GenericUDAFEvaluator {
 
     private PrimitiveObjectInspector inputOI;#参数的类型
@@ -256,7 +254,7 @@ public static class GenericUDAFSumLong extends GenericUDAFEvaluator {
 <br>
 简介：这是collect_set的源码，在group by之后，返回分组列元素组成的一个数组.主要代码如下：
 
-```java
+{% highlight java %}
 public ObjectInspector init(Mode m, ObjectInspector[] parameters)
       throws HiveException {
     super.init(m, parameters);
@@ -364,7 +362,7 @@ public ObjectInspector init(Mode m, ObjectInspector[] parameters)
 <br>
 下面是我写的一个用来切分”key:value;key:value;”这种字符串，返回结果为key, value两个字段。供参考：
 
-```java
+{% highlight java %}
 import java.util.ArrayList;
 
  import org.apache.hadoop.hive.ql.udf.generic.GenericUDTF;

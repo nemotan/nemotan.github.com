@@ -3,5 +3,6 @@ permalink: /:year/:month/:title/
 url: http://nemotan.github.io/
 author: nemotan
 pygments: true
+mardown: redcarpet
 paginate: 24
 iurl: https://raw.githubusercontent.com/nemotan/imgs/master

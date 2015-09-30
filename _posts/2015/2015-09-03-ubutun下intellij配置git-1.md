@@ -10,15 +10,16 @@ tags:
 ##安装intellij
 直接去官网下载linux版本即可
 ##安装git
-ubutun执行:
-	
-	安装：	
-		apt-get install git
-	配置：
-		git config --global user.name "nemotan"
-		git config --global user.email "nemotan@126.com"
-		ssh-keygen -t rsa -C "nemotan@126.com"
-		
+ubutun执行：
+
+{% highlight bash %}
+安装：	
+$ apt-get install git
+配置：
+$ git config --global user.name "nemotan"
+$ git config --global user.email "nemotan@126.com"
+$ ssh-keygen -t rsa -C "nemotan@126.com"
+{% endhighlight %}
 进入到~/.ssh目录，发现id_rsa.pub文件，把里面的内容复制到gitthub官网的seeting下的ssh key进行添加。
 ##intellij idea git配置
 1、File-->seegting-->Version Control-->GitHub,输入用户名和密码。
@@ -32,10 +33,11 @@ ubutun执行:
 ##另外附上：命令行提交到远程github
 安装好git以后需要执行的命令如下：
 
-	git init 初始化本地
-	git add * 添加所有
-	git commit -m "init"
-	git remote add origin https://github.com/nemotan/test1.git  
-	git push -u origin master
-
+{% highlight bash %}
+$ git init 初始化本地
+$ git add * 添加所有
+$ git commit -m "init"
+$ git remote add origin https://github.com/nemotan/test1.git  
+$ git push -u origin master
+{% endhighlight %}
 

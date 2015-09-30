@@ -17,6 +17,7 @@ hive常用函数请参考：<a href="https://cwiki.apache.org/confluence/display
 
 ##UDFS（用户自定义函数）
 首先，你需要创建一个类继承UDF，必须有一个或者多个名为evaluate的方法。
+{% highlight java %}
 
 ```java
 /**
@@ -47,6 +48,8 @@ public class ArraySizeSum extends UDF {
     }
 }
 ```
+{% endhighlight %}
+
 把程序打包成jar，并且创建临时函数（自定义函数class文件需要在hive的classpath下）
 
 ```bash

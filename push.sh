@@ -8,7 +8,7 @@ if [ $# -ge 1 ];
   then
     git commit -m "$1" 
 else 
-    git commit -m "同步blog"
+    `git commit -m "同步blog"`
 fi
 
 git status

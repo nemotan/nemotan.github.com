@@ -14,6 +14,7 @@ tags:
 ##wait和notify、notifyAll详解
 **synchronized 方法**控制对类成员变量的访问：每个类实例对应一把锁，每synchronized 方法都必须获得调用该方法的类实例的锁方能执行，否则所属线程阻塞，方法一旦执行就独占该锁，直到从该方法返回时才将锁释放，此后被阻塞的线程方能获得该锁，重新进入可执行状态。
 >**注意：**wait()/notify()调用任意对象的 wait() 方法导致线程阻塞，并且该对象上的锁被释放。而调用 任意对象的notify()方法则导致因调用该对象的 wait() 方法而阻塞的线程中随机选择的一个解除阻塞（但要等到获得锁后才真正可执行）。
+
 ###synchronized和wait()、notify()的关系
 1.有synchronized的地方不一定有wait,notify
 

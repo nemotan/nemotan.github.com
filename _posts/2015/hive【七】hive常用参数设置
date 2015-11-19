@@ -1,15 +1,14 @@
 ---
 layout: post
 title: hive【七】hive常用参数设置
-categories:
+categories: 
 - hive
-tags:
+tags: 
 - hive
 ---
 [toc]
-
 # hive【七】hive常用参数设置
-转自：[http://my.oschina.net/u/239075/blog?disp=2&p=1&catalog=3337560](http://my.oschina.net/u/239075/blog?disp=2&p=1&catalog=3337560)==
+==转自：[http://my.oschina.net/u/239075/blog?disp=2&p=1&catalog=3337560](http://my.oschina.net/u/239075/blog?disp=2&p=1&catalog=3337560)==
 
 ### 1、Map相关参数
 

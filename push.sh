@@ -17,3 +17,4 @@ fi
 git status
 git push
 echo "同步完毕！"
+sh show.sh

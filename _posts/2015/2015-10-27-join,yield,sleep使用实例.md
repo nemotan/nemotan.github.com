@@ -47,7 +47,7 @@ t.join(1000);  //等待 t 线程，等待时间是1000毫秒
 
 **实例一:join方法的使用**
 
-```java
+{% highlight java %}
 public class JoinTest implements  Runnable{
     public static int a = 0;
 
@@ -65,13 +65,13 @@ public class JoinTest implements  Runnable{
         System.out.println(a);
     }
 }
-```
+{% endhighlight %}
 
 结果：当t.join()未加之前，打印出a得值一般不会是5，因为主线程打印的时候，线程t还没有运行完成。当加上t.join之后，主线程会阻塞，直到t线程运行完成之后在往下执行，最终结果一定是5.
 
 **实例二：join（long seconds）的使用**
 
-```java
+{% highlight java %}
 public class JoinTest2 implements Runnable{
     public void run() {
         try {
@@ -100,7 +100,7 @@ Begin sleep
 joinFinish
 End sleep
 */
-```
+{% endhighlight %}
 很明显，t线程join（1000）的时候，主线程只阻塞了1000毫秒，1000毫秒之后继续往下执行，而t线程执行过程中暂停了5000毫秒。说明join（long seconeds）使得主线程阻塞seconeds毫秒，之后不管t是否在执行，都会往下执行。
 
 
@@ -112,7 +112,7 @@ End sleep
 
 **yield（）定义如下：**
 
-```java
+{% highlight java %}
 /**
   * A hint to the scheduler that the current thread is willing to yield its current use of a processor. The scheduler is free to ignore
   * this hint. Yield is a heuristic attempt to improve relative progression between threads that would otherwise over-utilize a CPU.
@@ -120,7 +120,7 @@ End sleep
   */
  
 public static native void yield();
-```
+{% endhighlight %}
 
 ####join方法和yield方法区别
 - sleep(long)使当前线程进入停滞状态，所以执行sleep()的线程在指定的时间内肯定不会被执行；
@@ -139,7 +139,7 @@ sleep 方法使当前运行中的线程睡眠一段时间，进入不可以运�
  ##线程的优先级
  **实例：测试优先级**
  
- ```java
+ {% highlight java %}
  public class YieldTest extends Thread {
     private String sTname = "";
 
@@ -170,7 +170,7 @@ one
 two
 two
 */
- ```
+ {% endhighlight %}
  从输出的结果看，pm2设置了较高优先级，pm1设置了较低优先级，为什么会线程1先执行完呢？难道线程优先级没有生效？
 
 其实：<font color="red">高优先级</font>
@@ -185,7 +185,7 @@ two
 
 调用`yield()`方法时，两个线程**依次打印**，然后将执行机会交给对方，一直这样进行下去。
 
-```java
+{% highlight java %}
 package test.core.threads;
  
 public class YieldExample
@@ -251,4 +251,4 @@ class Consumer extends Thread
  I am Producer : Produced Item 4
  I am Consumer : Consumed Item 4
 */
-```
+{% endhighlight %}

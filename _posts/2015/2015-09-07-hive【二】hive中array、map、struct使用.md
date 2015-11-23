@@ -20,17 +20,17 @@ hive提供了复合数据类型：<br>
 ##Struct使用
 建表：
 
-```bash
+{% highlight bash %}
 
 	hive> create table student_test(id INT, info struct<name:STRING, age:INT>)  
 	    > ROW FORMAT DELIMITED FIELDS TERMINATED BY ','                         
 		> COLLECTION ITEMS TERMINATED BY ':';                                   
 		 OK  
 		 Time taken: 0.446 seconds 
-```
+{% endhighlight %}
 导入数据：
 
-```bash
+{% highlight bash %}
 	$ cat test5.txt   
 	1,zhou:30  
 	2,yan:30  
@@ -42,10 +42,10 @@ hive提供了复合数据类型：<br>
 	Loading data to table default.student_test  
 	OK  
 	Time taken: 0.35 seconds  
-```
+{% endhighlight %}
 查询：
 	
-```bash
+{% highlight bash %}
 	hive> select info.age from student_test;  
 	Total MapReduce jobs = 1  
 	......  
@@ -56,11 +56,11 @@ hive提供了复合数据类型：<br>
 	20  
 	80  
 	Time taken: 21.677 seconds  
-```
+{% endhighlight %}
 ##Array
 建表：
 
-```bash
+{% highlight bash %}
 
 	hive> create table class_test(name string, student_id_list array<INT>)  
 	    > ROW FORMAT DELIMITED                                              
@@ -68,11 +68,11 @@ hive提供了复合数据类型：<br>
 	    > COLLECTION ITEMS TERMINATED BY ':';                               
 	OK  
 	Time taken: 0.099 seconds  
-```
+{% endhighlight %}
 
 导入数据：
 
-```bash
+{% highlight bash %}
 	
 	$ cat test6.txt   
 	034,1:2:3:4  
@@ -84,11 +84,11 @@ hive提供了复合数据类型：<br>
 	Loading data to table default.class_test  
 	OK  
 	Time taken: 0.198 seconds  
-```	
+{% endhighlight %}	
 	
 查询：
 
-```bash
+{% highlight bash %}
 	
 	hive> select student_id_list[3] from class_test;  
 	Total MapReduce jobs = 1  
@@ -99,12 +99,12 @@ hive提供了复合数据类型：<br>
 	NULL  
 	10  
 	Time taken: 21.574 seconds  
-```
+{% endhighlight %}
 
 ##Map使用
 建表：
 
-```bash
+{% highlight bash %}
 
 	hive> create table employee(id string, perf map<string, int>)       
         > ROW FORMAT DELIMITED                                          
@@ -112,22 +112,22 @@ hive提供了复合数据类型：<br>
    	    > COLLECTION ITEMS TERMINATED BY ','                       
         > MAP KEYS TERMINATED BY ':';                                    
 	    e taken: 0.144 seconds  
-```
+{% endhighlight %}
 
 导入数据：
 
-```bash
+{% highlight bash %}
 	
 	$ cat test7.txt   
 	1       job:80,team:60,person:70  
 	2       job:60,team:80  
 	3       job:90,team:70,person:100  
 	hive>  LOAD DATA LOCAL INPATH '/home/work/data/test7.txt' INTO TABLE employee;
-```
+{% endhighlight %}
 
 查询：
 
-```bash
+{% highlight bash %}
 	
 	hive> select perf['person'] from employee;  
 	Total MapReduce jobs = 1  
@@ -146,4 +146,4 @@ hive提供了复合数据类型：<br>
 	70  
 	100  
 	Time taken: 21.989 seconds  
-```
+{% endhighlight %}

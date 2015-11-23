@@ -52,7 +52,7 @@ wait() 和 notify() 方法最后再说明两点：
 可以通过调用方法 isDaemon() 来判断一个线程是否是守护线程，也可以调用方法 setDaemon() 来将一个线程设为守护线程。
 ###实例
 ####实例一：生产者消费者
-```java
+{% highlight java %}
 public class Ticket1 {
     int MAX = 10;
     int count = 0;
@@ -130,7 +130,7 @@ class Producer implements Runnable{
     }
 }
 
-```
+{% endhighlight %}
 **结果输出：**
 >生产者1生产了:9
 生产者1生产了:10
@@ -143,17 +143,17 @@ class Producer implements Runnable{
 
 **打印类**
 
-```java
+{% highlight java %}
 public class Print {
     public void print(){
            System.out.println(Thread.currentThread().getName());
 
     }
 }
-```
+{% endhighlight %}
 **线程类**
 
-```java
+{% highlight java %}
 public class PrintThread {
     public static void main(String args[]) {
         Print printA = new Print();
@@ -201,5 +201,5 @@ class PrintTh implements Runnable {
             count--;
     }
 }
-```
+{% endhighlight %}
 

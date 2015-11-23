@@ -8,17 +8,17 @@ tags:
 ---
 在Beeline或者在CLI中我们可以用如下命令查看函数信息
 
-{% highlight bash %}	
+```bash	
 SHOW FUNCTIONS;                       #显示所有函数	
 DESCRIBE FUNCTION <function_name>;    #显示函数简单描述
 DESCRIBE FUNCTION EXTENDED <function_name>; #显示函数详细描述
-{% endhighlight %}
+```
 hive常用函数请参考：<a href="https://cwiki.apache.org/confluence/display/Hive/LanguageManual+UDF">hive官网UDF页</a>
 
 ##UDFS（用户自定义函数）
 首先，你需要创建一个类继承UDF，必须有一个或者多个名为evaluate的方法。
 
-{% highlight java %}
+```java
 /**
  * 求一個升序的数组中，N个最大值的和
  *
@@ -46,14 +46,14 @@ public class ArraySizeSum extends UDF {
         return result;
     }
 }
-{% endhighlight %}
+```
 
 把程序打包成jar，并且创建临时函数（自定义函数class文件需要在hive的classpath下）
 
-{% highlight bash %}
+```bash
 $ add jar /home/nemo/hive-1.2.1/lib/hive_behavior.jar; 
 $ create temporary function size_sum as 'com.landray.hive.ql.ArraySizeSum';
-{% endhighlight %}
+```
 
 ##UDAF（用户自定义聚合函数）
 ###介绍
@@ -64,7 +64,7 @@ User-Defined Aggregation Functions(UDAFS：用户自定义聚合函数)是一个
 resolver实现类型检测，和操作符重载，老得api必须继承org.apache.hadoop.hive.ql.udf.GenericUDAFResolver2 ，为了新版本的hive改进，建议继承AbstractGenericUDAFResolver类。
 <br>代码架构如下：
 
-{% highlight java %}
+```java
 public class GenericUDAFHistogramNumeric extends AbstractGenericUDAFResolver {
   static final Log LOG = LogFactory.getLog(GenericUDAFHistogramNumeric.class.getName());
  
@@ -79,11 +79,11 @@ public class GenericUDAFHistogramNumeric extends AbstractGenericUDAFResolver {
     // UDAF的真正逻辑
   }
 }
-{% endhighlight %}
+```
 ###实现evaluator
 所有evaluators必须继承抽象类org.apache.hadoop.hive.ql.udf.generic.GenericUDAFEvaluator。子类必须实现它的一些抽象方法，实现UDAF的逻辑。GenericUDAFEvaluator有一个嵌套类Mode,这个类很重要，它表示了udaf在mapreduce的各个阶段，理解Mode的含义，就可以理解了hive的UDAF的运行流程。
 
-{% highlight java %}
+```java
 public static enum Mode {
     /**
      * PARTIAL1: 这个是mapreduce的map阶段:从原始数据到部分数据聚合
@@ -106,10 +106,10 @@ public static enum Mode {
      */
     COMPLETE
   };
-{% endhighlight %}
+```
 evaluator代码架构：
 
-{% highlight java %}
+```java
 #!Java
   public static class GenericUDAFHistogramNumericEvaluator extends GenericUDAFEvaluator {
  
@@ -159,12 +159,12 @@ evaluator代码架构：
     public void reset(AggregationBuffer agg) throws HiveException {
     }   
   }
-{% endhighlight %}
+```
 
 **源码分析一：GenericUDAFSumLong**
 <br>这是一个sum求和的UDAF：<br>
 
-{% highlight java %}
+```java
 public static class GenericUDAFSumLong extends GenericUDAFEvaluator {
 
     private PrimitiveObjectInspector inputOI;#参数的类型
@@ -248,13 +248,13 @@ public static class GenericUDAFSumLong extends GenericUDAFEvaluator {
     }
 
   }
-{% endhighlight %}
+```
 
 **源码分析二：GenericUDAFMkCollectionEvaluator**
 <br>
 简介：这是collect_set的源码，在group by之后，返回分组列元素组成的一个数组.主要代码如下：
 
-{% highlight java %}
+```java
 public ObjectInspector init(Mode m, ObjectInspector[] parameters)
       throws HiveException {
     super.init(m, parameters);
@@ -355,14 +355,14 @@ public ObjectInspector init(Mode m, ObjectInspector[] parameters)
     Object pCopy = ObjectInspectorUtils.copyToStandardObject(p,  this.inputOI);
     myagg.container.add(pCopy);
   }
-{% endhighlight %}
+```
 ##UDTF(User-Defined Table-Generating Functions)
  用来解决 输入一行输出多行(On-to-many maping) 的需求。UDTF需要继承GenericUDTF抽象类，实现initialize, process, and，和close方法。initalize方法返回UDTF所预期的参数的类型。UDTF必须返回行信息。初始化完成后，UDTF会调用process方法。在process中，每一次forward()调用产生一行；如果产生多列可以将多个列的值放在一个数组中，然后将该数组传入到forward()函数。<br>
 最后调用close（）方法。
 <br>
 下面是我写的一个用来切分”key:value;key:value;”这种字符串，返回结果为key, value两个字段。供参考：
 
-{% highlight java %}
+```java
 import java.util.ArrayList;
 
  import org.apache.hadoop.hive.ql.udf.generic.GenericUDTF;
@@ -415,17 +415,17 @@ import java.util.ArrayList;
          }
      }
  }
-{% endhighlight %}
+```
 使用方法：
 
-{% highlight sql %}
+```sql
 select explode_map(properties) as (col1,col2) from src;  #正确
 select a, explode_map(properties) as (col1,col2) from src #错误，不能和其他参数一起使用
 select explode_map(explode_map(properties)) from src #错误，不可以嵌套使用
 select explode_map(properties) as (col1,col2) from src group by col1, col2 #错误，不可以和group by/cluster by/distribute by/sort by一起使用
 select src.id, mytable.col1, mytable.col2 from src lateral view explode_map(properties) mytable as col1, col2; #经常使用
 
-{% endhighlight %}
+```
 
 
 

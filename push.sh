@@ -1,4 +1,7 @@
 #/bin/bash
+echo "先同步图片文件夹..."
+sh ../imgs/push.sh
+echo "图片文件夹同步完成..."
 echo "替换图片路径......"
 sh hide.sh
 echo "替换成功!"

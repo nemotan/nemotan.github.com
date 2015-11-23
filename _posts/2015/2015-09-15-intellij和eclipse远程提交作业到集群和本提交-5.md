@@ -26,7 +26,7 @@ tags:
 【2】重启eclipse配置，点击Window->Preferences->Hadoop map/reduce配置到下载hadoop -2.6.0.tar.gz包安装目录，<font color="red">作用是:创建Map/Reduce project的时候会自动根据该目录引入相对应的hadoop jar包，只有引入jar包之后，才能进行开发。</font>配置好这一步后就可以开发M-R了。 
 <br>
 【3】window->show view->other->Map/Reduce Locations,显示该视图之后，进入到该视图，新建一个location，并配置
- <img src="{{site.iurl}}/2015/5_2.png" width="100%"/>
+ <img src="/Users/nemo/07blog/imgs/2015/5_2.png" width="100%"/>
  	
  	Map/Reduce Master： host:master   post:9001
  	DFS master:	host:master port:9000
@@ -34,7 +34,7 @@ tags:
  	#master为hadoop安装的core-site.xml中的ip地址
  	
  【4】配置好之后，在eclipse prokect视图会看到你配置的location，connet之后会看到hdfs上的的文件和目录。
- <img src="{{site.iurl}}/2015/5_3.png" width="100%"/>
+ <img src="/Users/nemo/07blog/imgs/2015/5_3.png" width="100%"/>
 <br>3、创建m-r project
 
 接下来救可以创建Map/Reduce project了，编写一个hellp word，右键run hadoop就可以运行了。
@@ -197,7 +197,7 @@ tags:
 	
 	mvn package	
 idea自动打包：
-<img src="{{site.iurl}}/2015/5_1.png" width="100%"/>
+<img src="/Users/nemo/07blog/imgs/2015/5_1.png" width="100%"/>
 <br>2、直接提交job到集群或者其他环境。	
 	
 	hadoop jar $home/03ws/sp_intel/out/artifacts/hadoop_behavior_jar/hadoop_behavior.jar com.landray.behavior.job.JobManager

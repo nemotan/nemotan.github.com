@@ -1,6 +1,6 @@
 ---
 layout: post
-title: jvm【二】jvm内存模型
+title: jvm【二】jvm内存模型&jvm常用参数
 categories:
 - jvm
 tags:
@@ -60,8 +60,10 @@ tags:
 
 ## JVM常用参数
 
+### 参数
+
 |配置|解释|
-| :---: | :---: |
+| :--- | :--- |
 |-Xss××k|方法栈深度|
 |-XX:PermSize|方法区内存最小值|
 |-XX:MaxPermSize|方法区内存最大值|
@@ -74,6 +76,39 @@ tags:
 |-XX:SurvivorRatio=|S0/S1占新生代内存的比例|
 |-XX:PretenureSizeThreshold=|需要内存超过参数的对象，直接在旧生代分配|
 |-XX:MaxTenuringThreshold=|设置垃圾最大年龄。如果为0，新生代对象不经过S区，直接进行旧生代，值较大的话，会增加新生代对象再GC的概率。|
+
+### 实例：根据GC日志猜测jvm参数
+>Heap
+ def new generation   total 6464K, used 115K [0x34e80000, 0x35580000, 0x35580000)
+  eden space 5760K,   2% used [0x34e80000, 0x34e9cd38, 0x35420000)
+  from space 704K,   0% used [0x354d0000, 0x354d0000, 0x35580000)
+  to   space 704K,   0% used [0x35420000, 0x35420000, 0x354d0000)
+ tenured generation   total 18124K, used 8277K [0x35580000, 0x36733000, 0x37680000)
+   the space 18124K,  45% used [0x35580000, 0x35d95758, 0x35d95800, 0x36733000)
+ compacting perm gen  total 16384K, used 16383K [0x37680000, 0x38680000, 0x38680000)
+   the space 16384K,  99% used [0x37680000, 0x3867ffc0, 0x38680000, 0x38680000)
+    ro space 10240K,  44% used [0x38680000, 0x38af73f0, 0x38af7400, 0x39080000)
+    rw space 12288K,  52% used [0x39080000, 0x396cdd28, 0x396cde00, 0x39c80000)
+
+**分析过程**
+
+{% highlight java %}
+-XX:PermSize = 16384K = 16M
+-XX:MaxPermSize = (0x38680000-0x37680000）/1024/1024 = 16M
+-Xmx = (0x37680000-0x34e80000)/1024/1024 = 40M
+-Xms = 3.7+17.7 = 21.5m
+新生代=(6464k+704k)/1024=7M 3.7M
+老年代=33M 和 17.7M
+-XX:NewRatio= 33/7 约等于 5
+-XX:SurvivorRatio=8(因为：s0 大小为 704k,新生代大小为：
+6464+704=7168,704/7168=1/10)
+-XX:+PrintGCDetails
+
+因此得出的结果是：
+-XX:PermSize=16m -XX:MaxPermSize=16m -Xms22m -Xmx40m -XX:NewRatio=5
+-XX:SurvivorRatio=8 -XX:+PrintGCDetails
+{% endhighlight %}
+
 
 ## 小结
 

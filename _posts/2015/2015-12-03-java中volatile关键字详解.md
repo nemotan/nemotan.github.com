@@ -115,3 +115,7 @@ public class Counter {
 但是这一些操作并不是原子性，也就是 在read load之后，如果主内存count变量发生修改之后，线程工作内存中的值由于已经加载，不会产生对应的变化，所以计算出来的结果会和预期不一样 **对于volatile修饰的变量，jvm虚拟机只是保证从主内存加载到线程工作内存的值是最新的**。
 
 **例如假如线程1，线程2 在进行read,load 操作中，发现主内存中count的值都是5，那么都会加载这个最新的值在线程1堆count进行修改之后，会write到主内存中，主内存中的count变量就会变为6线程2由于已经进行read,load操作，在进行运算之后，也会更新主内存count的变量值为6。导致两个线程及时用volatile关键字修改之后，还是会存在并发的情况。**
+
+
+
+请参考大神制作：[Java 理论与实践: 正确使用 Volatile 变量](http://www.ibm.com/developerworks/cn/java/j-jtp06197.html)

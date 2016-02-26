@@ -82,9 +82,9 @@ import java.util.concurrent.Semaphore;
  * Created by nemo on 15/12/4.
  */
 public class SemaPhoreProduce {
-    static Buffer buffer = new Buffer();
+   static Buffer buffer = new Buffer();
 
-    static class Produce implements Runnable{
+   static class Produce implements Runnable{
         static int num = 1;
         @Override
         public void run() {
@@ -102,7 +102,7 @@ public class SemaPhoreProduce {
         }
     }
 
-    static class Consume implements Runnable{
+   static class Consume implements Runnable{
         @Override
         public void run() {
             while (true) {
@@ -117,7 +117,7 @@ public class SemaPhoreProduce {
         }
     }
 
-    static class Buffer{
+   static class Buffer{
         // 非满锁
         final Semaphore notFull = new Semaphore(10);
         // 非空锁
@@ -178,7 +178,7 @@ public class SemaPhoreProduce {
         }
     }
 
-    public static void main(String args[]){
+   public static void main(String args[]){
         // 启动线程
         for (int i = 0; i <= 3; i++) {
             // 生产者

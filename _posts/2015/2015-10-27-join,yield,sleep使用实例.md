@@ -50,13 +50,11 @@ t.join(1000);  //等待 t 线程，等待时间是1000毫秒
 {% highlight java %}
 public class JoinTest implements  Runnable{
     public static int a = 0;
-
     public void run() {
         for (int k = 0; k < 5; k++) {
             a = a + 1;
         }
     }
-
     public static void main(String[] args) throws Exception {
         Runnable r = (Runnable) new JoinTest();
         Thread t = new Thread(r);
@@ -81,7 +79,6 @@ public class JoinTest2 implements Runnable{
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
     }
     public static void main(String[] args) {
         Thread t = new Thread(new JoinTest2());
@@ -142,17 +139,14 @@ sleep 方法使当前运行中的线程睡眠一段时间，进入不可以运�
  {% highlight java %}
  public class YieldTest extends Thread {
     private String sTname = "";
-
     YieldTest(String s) {
         sTname = s;
     }
-
     public void run() {
         for (int i = 0; i < 2; i++) {
                 System.out.println(sTname);
         }
     }
-
     public static void main(String argv[]) {
         YieldTest pm1 = new YieldTest("one");
         YieldTest pm2 = new YieldTest("two");
@@ -193,11 +187,9 @@ public class YieldExample
    public static void main(String[] args)
    {
       Thread producer = new Producer();
-      Thread consumer = new Consumer();
- 
+      Thread consumer = new Consumer(); 
       producer.setPriority(Thread.MIN_PRIORITY); //Min Priority
-      consumer.setPriority(Thread.MAX_PRIORITY); //Max Priority
- 
+      consumer.setPriority(Thread.MAX_PRIORITY); //Max Priority 
       producer.start();
       consumer.start();
    }

@@ -167,8 +167,8 @@ evaluator代码架构：
 {% highlight java %}
 public static class GenericUDAFSumLong extends GenericUDAFEvaluator {
 
-    private PrimitiveObjectInspector inputOI;#参数的类型
-    private LongWritable result;   #最终的结果，在terminate方法中调用
+   private PrimitiveObjectInspector inputOI;#参数的类型
+   private LongWritable result;   #最终的结果，在terminate方法中调用
 
 　　　//这个方法返回了UDAF的返回类型，这里确定了sum自定义函数的返回类型是Long类型
     @Override
@@ -180,15 +180,15 @@ public static class GenericUDAFSumLong extends GenericUDAFEvaluator {
       return PrimitiveObjectInspectorFactory.writableLongObjectInspector;
     }
 
-    /** 存储sum的值的类 */
+   /** 存储sum的值的类 */
     static class SumLongAgg implements AggregationBuffer {
       boolean empty;
       long sum;
     }
 
-    //创建新的聚合计算的需要的内存，用来存储mapper,combiner,reducer运算过程中的相加总和。
+   //创建新的聚合计算的需要的内存，用来存储mapper,combiner,reducer运算过程中的相加总和。
 
-    @Override
+   @Override
     public AggregationBuffer getNewAggregationBuffer() throws HiveException {
       SumLongAgg result = new SumLongAgg();
       reset(result);
@@ -197,14 +197,14 @@ public static class GenericUDAFSumLong extends GenericUDAFEvaluator {
 　　　　
     //mapreduce支持mapper和reducer的重用，所以为了兼容，也需要做内存的重用。
 
-    @Override
+   @Override
     public void reset(AggregationBuffer agg) throws HiveException {
       SumLongAgg myagg = (SumLongAgg) agg;
       myagg.empty = true;
       myagg.sum = 0;
     }
 
-    private boolean warned = false;
+   private boolean warned = false;
     　　
     //map阶段调用，只要把保存当前和的对象agg，再加上输入的参数，就可以了。
     @Override
@@ -226,7 +226,7 @@ public static class GenericUDAFSumLong extends GenericUDAFEvaluator {
       return terminate(agg);
     }
        
-    //combiner合并map返回的结果，还有reducer合并mapper或combiner返回的结果。
+   //combiner合并map返回的结果，还有reducer合并mapper或combiner返回的结果。
     @Override
     public void merge(AggregationBuffer agg, Object partial) throws HiveException {
       if (partial != null) {
@@ -236,7 +236,7 @@ public static class GenericUDAFSumLong extends GenericUDAFEvaluator {
       }
     }
      
-    //reducer返回结果，或者是只有mapper，没有reducer时，在mapper端返回结果。
+   //reducer返回结果，或者是只有mapper，没有reducer时，在mapper端返回结果。
     @Override
     public Object terminate(AggregationBuffer agg) throws HiveException {
       SumLongAgg myagg = (SumLongAgg) agg;
@@ -284,9 +284,9 @@ public ObjectInspector init(Mode m, ObjectInspector[] parameters)
 
   class MkArrayAggregationBuffer extends AbstractAggregationBuffer {
 
-    private Collection<Object> container;
+   private Collection<Object> container;
 
-    public MkArrayAggregationBuffer() {
+   public MkArrayAggregationBuffer() {
       if (bufferType == BufferType.LIST){
         container = new ArrayList<Object>();
       } else if(bufferType == BufferType.SET){
@@ -315,7 +315,7 @@ public ObjectInspector init(Mode m, ObjectInspector[] parameters)
     assert (parameters.length == 1);
     Object p = parameters[0];
 
-    if (p != null) {
+   if (p != null) {
       MkArrayAggregationBuffer myagg = (MkArrayAggregationBuffer) agg;
       putIntoCollection(p, myagg);
     }
@@ -376,12 +376,11 @@ import java.util.ArrayList;
 
  public class ExplodeMap extends GenericUDTF{
 
-     @Override
+   @Override
      public void close() throws HiveException {
          // TODO Auto-generated method stub    
      }
-
-     @Override
+    @Override
      public StructObjectInspector initialize(ObjectInspector[] args)
              throws UDFArgumentException {
          if (args.length != 1) {
@@ -391,17 +390,16 @@ import java.util.ArrayList;
              throw new UDFArgumentException("ExplodeMap takes string as a parameter");
          }
 
-         ArrayList<String> fieldNames = new ArrayList<String>();
+   ArrayList<String> fieldNames = new ArrayList<String>();
          ArrayList<ObjectInspector> fieldOIs = new ArrayList<ObjectInspector>();
          fieldNames.add("col1");
          fieldOIs.add(PrimitiveObjectInspectorFactory.javaStringObjectInspector);
          fieldNames.add("col2");
          fieldOIs.add(PrimitiveObjectInspectorFactory.javaStringObjectInspector);
-
-         return ObjectInspectorFactory.getStandardStructObjectInspector(fieldNames,fieldOIs);
+             return ObjectInspectorFactory.getStandardStructObjectInspector(fieldNames,fieldOIs);
      }
 
-     @Override
+   @Override
      public void process(Object[] args) throws HiveException {
          String input = args[0].toString();
          String[] test = input.split(";");

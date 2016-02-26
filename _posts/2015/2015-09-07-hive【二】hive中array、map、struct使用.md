@@ -22,7 +22,7 @@ hive提供了复合数据类型：<br>
 
 {% highlight bash %}
 
-	hive> create table student_test(id INT, info struct<name:STRING, age:INT>)  
+hive> create table student_test(id INT, info struct<name:STRING, age:INT>)  
 	    > ROW FORMAT DELIMITED FIELDS TERMINATED BY ','                         
 		> COLLECTION ITEMS TERMINATED BY ':';                                   
 		 OK  
@@ -62,7 +62,7 @@ hive提供了复合数据类型：<br>
 
 {% highlight bash %}
 
-	hive> create table class_test(name string, student_id_list array<INT>)  
+hive> create table class_test(name string, student_id_list array<INT>)  
 	    > ROW FORMAT DELIMITED                                              
 	    > FIELDS TERMINATED BY ','                                          
 	    > COLLECTION ITEMS TERMINATED BY ':';                               
@@ -74,7 +74,7 @@ hive提供了复合数据类型：<br>
 
 {% highlight bash %}
 	
-	$ cat test6.txt   
+$ cat test6.txt   
 	034,1:2:3:4  
 	035,5:6  
 	036,7:8:9:10  
@@ -90,7 +90,7 @@ hive提供了复合数据类型：<br>
 
 {% highlight bash %}
 	
-	hive> select student_id_list[3] from class_test;  
+hive> select student_id_list[3] from class_test;  
 	Total MapReduce jobs = 1  
 	......  
 	Total MapReduce CPU Time Spent: 480 msec  
@@ -106,7 +106,7 @@ hive提供了复合数据类型：<br>
 
 {% highlight bash %}
 
-	hive> create table employee(id string, perf map<string, int>)       
+hive> create table employee(id string, perf map<string, int>)       
         > ROW FORMAT DELIMITED                                          
    		> FIELDS TERMINATED BY '\t'                                
    	    > COLLECTION ITEMS TERMINATED BY ','                       
@@ -118,7 +118,7 @@ hive提供了复合数据类型：<br>
 
 {% highlight bash %}
 	
-	$ cat test7.txt   
+$ cat test7.txt   
 	1       job:80,team:60,person:70  
 	2       job:60,team:80  
 	3       job:90,team:70,person:100  

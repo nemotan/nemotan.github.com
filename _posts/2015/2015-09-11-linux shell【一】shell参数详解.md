@@ -1,3 +1,4 @@
+
 ---
 layout: post
 title: linux shell【一】shell参数详解以及常用判断
@@ -6,6 +7,7 @@ categories:
 tags:
 - linux
 ---
+
 ##参数详解：$#,$@,$*,$?,$0,$1,$2
 	
 	$0 shell本身文件名
